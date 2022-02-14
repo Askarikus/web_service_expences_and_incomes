@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render
@@ -30,4 +31,11 @@ class UsernameValidationView(View):
 
 class RegistrationView(View):
     def get(self, request):
+        return render(request, 'authentication/register.html')
+
+    def post(self, request):
+        messages.success(request, 'success message')
+        messages.warning(request, 'success message')
+        messages.info(request, 'success message')
+        messages.error(request, 'success message')
         return render(request, 'authentication/register.html')
