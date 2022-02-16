@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import index, add_expense
-
+from . import views
 urlpatterns = [
-    path('', index, name='expenses'),
-    path('add_expense', add_expense, name='add_expense')
+    path('', views.index, name='expenses'),
+    path('add-expense', views.add_expense, name="add-expenses"),
+    path('edit-expense/<int:id>', views.expense_edit, name="expense-edit"),
+    path('expense-delete/<int:id>', views.delete_expense, name="expense-delete"),
 ]
