@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 
 from .models import Category, Expense
@@ -9,13 +10,13 @@ from .models import Category, Expense
 def index(request):
     categories = Category.objects.all()
     expenses = Expense.objects.filter(owner=request.user)
-    #paginator = Paginator(expenses, 5)
+    paginator = Paginator(expenses, 3)
     page_number = request.GET.get('page')
-    #page_obj = Paginator.get_page(paginator, page_number)
+    page_obj = Paginator.get_page(paginator, page_number)
     #currency = UserPreference.objects.get(user=request.user).currency
     context = {
         'expenses': expenses,
-        #'page_obj': page_obj,
+        'page_obj': page_obj,
         #'currency': currency
     }
     return render(request, 'expenses/index.html', context)
